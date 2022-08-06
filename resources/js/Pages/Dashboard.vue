@@ -14,11 +14,11 @@ const onChangeFile = (e) => {
 };
 
 const generate = () => {
-    // form.post(route("generate"), {
-    //     onFinish: () => {
-    //         form.reset("file");
-    //     },
-    // });
+    form.post(route("generate"), {
+        onFinish: () => {
+            form.reset("file");
+        },
+    });
 };
 </script>
 
