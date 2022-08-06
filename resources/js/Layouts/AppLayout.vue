@@ -28,7 +28,7 @@ const logout = () => {
 </script>
 
 <template>
-    <div>
+    <div class="bg-gray-100">
         <Head :title="title" />
 
         <JetBanner />
@@ -111,7 +111,7 @@ const logout = () => {
                     </form>
                 </nav>
             </div>
-            <div>
+            <div class="flex max-w-7xl mx-auto min-h-screen">
                 <main>
                     <slot />
                 </main>
