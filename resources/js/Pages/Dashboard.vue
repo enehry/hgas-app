@@ -13,13 +13,13 @@ const onChangeFile = (e) => {
     form.file = e.target.files[0];
 };
 
-const generate = () => {
-    form.post(route("generate"), {
-        onFinish: () => {
-            form.reset("file");
-        },
-    });
-};
+// const generate = () => {
+//     form.post(route("generate"), {
+//         onFinish: () => {
+//             form.reset("file");
+//         },
+//     });
+// };
 </script>
 
 <template>
