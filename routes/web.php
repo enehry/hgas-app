@@ -36,6 +36,9 @@ Route::middleware([
   Route::get('/', function () {
     return to_route('dashboard');
   });
+  Route::post('/generate', DashboardController::class . '@generate')->name('generate');
+
+
   Route::get('/dashboard', DashboardController::class . '@index')->name('dashboard');
   Route::get('/manage-melcs', ManageMelcsController::class . '@index')->name('manage-melcs.index');
   Route::get('/page-not-found', fn () => Inertia::render('PageNotFound'))->name('PageNotFound');
