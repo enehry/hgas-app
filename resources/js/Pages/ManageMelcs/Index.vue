@@ -1,7 +1,7 @@
 <template>
     <AppLayout>
         <Head title="Manage MELCs" />
-        <h1>Manage MELCS</h1>
+        <p>Manage MELCs</p>
     </AppLayout>
 </template>
 

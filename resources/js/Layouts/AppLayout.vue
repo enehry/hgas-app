@@ -37,16 +37,33 @@ const logout = () => {
         <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
             <div
                 @click="showNav()"
-                class="sticky top-0 bg-blue-500 flex flex-col w-full md:w-64 text-gray-700 dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0"
+                class="sticky top-0 bg-[#181E36] flex flex-col w-full md:w-64 text-white dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0"
             >
                 <div
                     class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between"
                 >
-                    <a
-                        :href="route('dashboard')"
-                        class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
-                        >Flowtrail UI</a
-                    >
+                    <div class="pt-4 pb-2 px-6">
+                        <a :href="route('profile.show')">
+                            <div class="flex items-center flex-row md:flex-col">
+                                <div class="shrink-0">
+                                    <img
+                                        src="https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/79515135_10111007623880301_5111576226921709568_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGmIvzg9GscszQOyO0JRkYwQyaNjMnA6N9DJo2MycDo39imCPIDo9jsjdLWWwWMl694hQdXb6cs7vvuim0vftFn&_nc_ohc=JyItJj0hgIEAX8Af_XN&_nc_oc=AQn_NwoHlbfh7Wf_eXFZfqlaPRTqVnudB5sXvVDZCdPhrn5qSh0-UO94VcBLQu_s8wk&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT-bWN_1SHF7jowktSTbkInweD1Bw-gW4EQUVdBGBk5sXw&oe=631687D6"
+                                        class="rounded-full w-16 md:w-32 mx-auto"
+                                        alt="Avatar"
+                                    />
+                                </div>
+                                <br />
+                                <div class="grow ml-5 md:mx-auto">
+                                    <p
+                                        class="text-base font-semibold text-white"
+                                    >
+                                        Mark Zuckerberg
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <br />
                     <button
                         class="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
                     >
@@ -75,43 +92,128 @@ const logout = () => {
                     class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto"
                 >
                     <Link
-                        class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        class="flex flex-row px-4 py-2 mt-2 text-base font-semibold text-white rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         :href="route('dashboard')"
                         :class="{
-                            'bg-gray-200 rounded-lg':
+                            'bg-white text-[#181E36] hover:bg-white rounded-lg':
                                 route().current('dashboard'),
                         }"
-                        >Home
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            />
+                        </svg>
+                        Home
                     </Link>
-                    <a
-                        class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                    <Link
+                        class="flex flex-row px-4 py-2 mt-2 text-base font-semibold text-white rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         :href="route('profile.show')"
                         :class="{
-                            'bg-gray-200 rounded-lg':
+                            'bg-white text-[#181E36] hover:bg-white rounded-lg':
                                 route().current('profile.*'),
                         }"
-                        >My Profile</a
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        My Profile</Link
                     >
                     <Link
-                        class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        class="flex flex-row px-4 py-2 mt-2 text-base font-semibold text-white rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         :href="route('manage-melcs.index')"
-                        >Manage MELCs</Link
+                        :class="{
+                            'bg-white text-[#181E36] hover:bg-white rounded-lg':
+                                route().current('manage-melcs.*'),
+                        }"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                            />
+                        </svg>
+                        Manage MELCs</Link
                     >
                     <Link
-                        class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        class="flex flex-row px-4 py-2 mt-2 mb-12 text-base font-semibold text-white rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         :href="route('users.index')"
                         :class="{
-                            'bg-gray-200 rounded-lg':
+                            'bg-white text-[#181E36] hover:bg-white rounded-lg':
                                 route().current('users.*'),
                         }"
-                        >Manage Users
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 mr-3"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                            />
+                        </svg>
+
+                        Manage Users
                     </Link>
-                    <form @submit.prevent="logout">
-                        <button type="submit">Log Out</button>
+                    <br />
+                    <form @submit.prevent="logout" class="flex justify-center">
+                        <button
+                            type="submit"
+                            class="flex flex-row mt-4 mb-6 px-4 py-2 text-base align-center bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:bg-[#E5E7EB] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition bottom-0 absolute"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 mr-3"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                />
+                            </svg>
+                            Log Out
+                        </button>
                     </form>
                 </nav>
             </div>
-            <div class="flex max-w-7xl mx-auto min-h-screen">
+            <div class="flex max-w-7xl mx-auto min-h-screen ">
                 <main>
                     <slot />
                 </main>
