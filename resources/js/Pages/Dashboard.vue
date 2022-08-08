@@ -60,7 +60,7 @@ const removeFile = () => {
                 </h2>
 
                 <p class="mt-2 text-gray-500 tracking-wide">
-                    Upload or darg & drop your file xlx, xlsx.
+                    Upload or drag & drop your file xlx, xlsx.
                 </p>
 
                 <input

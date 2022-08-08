@@ -43,5 +43,10 @@ Route::middleware([
   Route::get('/manage-melcs', ManageMelcsController::class . '@index')->name('manage-melcs.index');
   Route::post('/manage-melcs', ManageMelcsController::class . '@store')->name('manage-melcs.store');
   Route::delete('/manage-melcs/{melc}', ManageMelcsController::class . '@delete')->name('manage-melcs.delete');
+  Route::put('/manage-melcs/{melc}', ManageMelcsController::class . '@update')->name('manage-melcs.update');
+  Route::post('/manage-melcs/update-or-create-cert-info', ManageMelcsController::class . '@updateOrCreateCertInfo')->name('manage-melcs.cert-info');
+
+
+
   Route::get('/page-not-found', fn () => Inertia::render('PageNotFound'))->name('PageNotFound');
 });
