@@ -37,7 +37,7 @@ const logout = () => {
         <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
             <div
                 @click="showNav()"
-                class="sticky top-0 bg-[#181E36] flex flex-col w-full md:w-64 text-white dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0"
+                class="bg-[#181E36] md:sticky relative md:top-0 md:h-screen flex flex-col w-full md:w-64 text-white dark-mode:text-gray-200 dark-mode:bg-gray-800 flex-shrink-0"
             >
                 <div
                     class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between"
@@ -47,9 +47,11 @@ const logout = () => {
                             <div class="flex items-center flex-row md:flex-col">
                                 <div class="shrink-0">
                                     <img
-                                        src="https://scontent.fmnl25-1.fna.fbcdn.net/v/t1.6435-9/79515135_10111007623880301_5111576226921709568_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGmIvzg9GscszQOyO0JRkYwQyaNjMnA6N9DJo2MycDo39imCPIDo9jsjdLWWwWMl694hQdXb6cs7vvuim0vftFn&_nc_ohc=JyItJj0hgIEAX8Af_XN&_nc_oc=AQn_NwoHlbfh7Wf_eXFZfqlaPRTqVnudB5sXvVDZCdPhrn5qSh0-UO94VcBLQu_s8wk&_nc_ht=scontent.fmnl25-1.fna&oh=00_AT-bWN_1SHF7jowktSTbkInweD1Bw-gW4EQUVdBGBk5sXw&oe=631687D6"
-                                        class="rounded-full w-16 md:w-32 mx-auto"
-                                        alt="Avatar"
+                                        class="rounded-full w-16 h-16 md:h-32 md:w-32 mx-auto object-cover"
+                                        :src="
+                                            $page.props.user.profile_photo_url
+                                        "
+                                        :alt="$page.props.user.name"
                                     />
                                 </div>
                                 <br />
@@ -57,7 +59,7 @@ const logout = () => {
                                     <p
                                         class="text-base font-semibold text-white"
                                     >
-                                        Mark Zuckerberg
+                                        {{ $page.props.user.name }}
                                     </p>
                                 </div>
                             </div>
@@ -140,7 +142,7 @@ const logout = () => {
                         My Profile</Link
                     >
                     <Link
-                        class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        class="flex px-4 py-2 mt-2 text-sm font-semibold text-white rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         :href="route('manage-melcs.index')"
                         :class="{
                             'bg-white text-[#181E36] hover:bg-white rounded-lg':
@@ -213,7 +215,7 @@ const logout = () => {
                     </form>
                 </nav>
             </div>
-            <div class="flex max-w-7xl mx-auto min-h-screen ">
+            <div class="flex max-w-7xl mx-auto min-h-screen">
                 <main>
                     <slot />
                 </main>
