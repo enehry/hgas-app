@@ -36,11 +36,11 @@ const removeFile = () => {
             <ValidationErrors />
             <label
                 for="dropzone-file"
-                class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center"
+                class="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-[#181E36] bg-white p-6 text-center"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-10 w-10 text-blue-500"
+                    class="h-10 w-10 text-[#181E36]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
