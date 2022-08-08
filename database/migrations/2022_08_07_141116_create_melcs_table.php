@@ -16,7 +16,7 @@ return new class extends Migration
     Schema::create('melcs', function (Blueprint $table) {
       $table->id();
       $table->string('description');
-      $table->int('order');
+      $table->integer('order');
       $table->timestamps();
     });
   }

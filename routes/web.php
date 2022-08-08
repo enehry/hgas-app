@@ -41,5 +41,7 @@ Route::middleware([
 
   Route::get('/dashboard', DashboardController::class . '@index')->name('dashboard');
   Route::get('/manage-melcs', ManageMelcsController::class . '@index')->name('manage-melcs.index');
+  Route::post('/manage-melcs', ManageMelcsController::class . '@store')->name('manage-melcs.store');
+  Route::delete('/manage-melcs/{melc}', ManageMelcsController::class . '@delete')->name('manage-melcs.delete');
   Route::get('/page-not-found', fn () => Inertia::render('PageNotFound'))->name('PageNotFound');
 });
