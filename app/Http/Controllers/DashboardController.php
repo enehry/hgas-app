@@ -67,12 +67,33 @@ class DashboardController extends Controller
 
         $iteration = $melcsStart;
         foreach ($_melcs as $melc) {
+          $score = $collection[$i][$iteration];
+          // interpret the score 
+          $interpretation = '';
+          if ($score >= 3.5) {
+            $interpretation = 'Developed and Commendable';
+          } else if ($score >= 2.5) {
+            $interpretation = 'Sufficiently Developed';
+          } else if ($score >= 1.5) {
+            $interpretation = 'Developing';
+          } else if ($score >= 0.5) {
+            $interpretation = 'Needs Improvement';
+          } else {
+            $interpretation = 'No chance to observe';
+          }
+
           $melcs[] = [
             'score' => $collection[$i][$iteration],
             'description' => $melc['description'],
+            'interpretation' => $interpretation,
           ];
           $iteration++;
         }
+
+
+
+
+
         $certificates[] = [
           'name' => $collection[$i][3],
           'melcs' => $melcs,
@@ -80,7 +101,8 @@ class DashboardController extends Controller
           'school_year' => $school_year,
           'adviser' => $adviser,
           'grade_section' => $grade_section,
-          'signature' => $signature
+          'signature' => $signature,
+
         ];
       } else {
         break;
