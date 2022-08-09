@@ -90,14 +90,15 @@ const submit = () => {
 
                 <div class="align-center justify-start mt-8">
                     <div class="grid grid-cols-2 gap-2">
-                        <JetButton
-                            class="w-full h-10"
+                        <Link
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                             :href="route('register')"
                         >
-                            Register
-                        </JetButton>
+                            <JetButton type="button" class="w-full h-10"
+                                >Register</JetButton
+                            >
+                        </Link>
 
                         <JetButton
                             class="w-full h-10"

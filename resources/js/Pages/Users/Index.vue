@@ -1,9 +1,9 @@
 <template>
     <AppLayout>
-        <div class="flex flex-col">
+        <div class="flex max-w-2xl flex-col">
             <div class="overflow-x-auto">
                 <div class="flex justify-between py-3 pl-2">
-                    <div class="relative max-w-xs">
+                    <div class="relative max-w-2xl">
                         <label for="search" class="sr-only"> Search </label>
                         <input
                             type="text"
@@ -131,7 +131,7 @@
                                     >
                                         <button
                                             class="text-red-500 hover:text-red-700"
-                                            v-on:click="toggleModal()"
+                                            v-on:click="toggleDelete()"
                                         >
                                             Delete
                                         </button>
@@ -168,7 +168,7 @@
                                     >
                                         <button
                                             class="text-red-500 hover:text-red-700"
-                                            v-on:click="toggleModal()"
+                                            v-on:click="toggleDelete()"
                                         >
                                             Delete
                                         </button>
@@ -298,7 +298,7 @@
         <!-- Delete Modal -->
         <div>
             <div
-                v-if="showModal"
+                v-if="showDeleteConfirm"
                 class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
             >
                 <div class="relative w-auto my-6 mx-auto max-w-6xl">
@@ -315,7 +315,7 @@
                             </h3>
                             <button
                                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                v-on:click="toggleModal()"
+                                v-on:click="toggleDelete()()"
                             >
                                 <span
                                     class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
@@ -339,14 +339,14 @@
                             <button
                                 class="px-4 py-2 text-base mx-1 bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:text-[#AAAAAA] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleModal()"
+                                v-on:click="toggleDelete()()"
                             >
                                 No
                             </button>
                             <button
                                 class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] hover:text-[#C6C6C6] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleModal()"
+                                v-on:click="toggleDelete()()"
                             >
                                 Yes
                             </button>
@@ -372,11 +372,15 @@ export default {
     data() {
         return {
             showModal: false,
+            showDeleteConfirm: false,
         };
     },
     methods: {
         toggleModal: function () {
             this.showModal = !this.showModal;
+        },
+        toggleDelete() {
+            this.showDeleteConfirm = !this.showDeleteConfirm;
         },
     },
 };
