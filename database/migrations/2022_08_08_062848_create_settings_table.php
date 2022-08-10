@@ -15,7 +15,8 @@ return new class extends Migration
   {
     Schema::create('settings', function (Blueprint $table) {
       $table->id();
-      $table->string('name')->unique();
+      $table->unsignedBigInteger('user_id');
+      $table->string('name');
       $table->string('value');
       $table->timestamps();
     });

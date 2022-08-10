@@ -14,10 +14,14 @@ const onChangeFile = (e) => {
     form.file = e.target.files[0];
 };
 
+const isLoading = ref(false);
+
 const generate = () => {
+    isLoading.value = true;
     form.post(route("generate"), {
         onFinish: () => {
             removeFile();
+            isLoading.value = false;
         },
     });
 };
@@ -26,6 +30,25 @@ const removeFile = () => {
     document.getElementById("dropzone-file").value = null;
     form.file = null;
 };
+
+const props = defineProps({
+    melcs: {
+        type: Array,
+        default: () => [],
+    },
+    certificate: {
+        type: Object,
+        default: () => {},
+    },
+    generatedCert: {
+        type: Object,
+        default: () => {},
+    },
+});
+
+const isGenerateEnabled = () =>
+    props.melcs.length <= 0 ||
+    Object.values(props.certificate).every((x) => x === null || x === "");
 </script>
 
 <template>
@@ -91,8 +114,35 @@ const removeFile = () => {
                     </svg>
                 </button>
             </div>
-            <Button @click="generate">Generate</Button>
-            <a href="./certificates/sample.pdf">Download</a>
+            <div class="text-gray-500" v-if="isGenerateEnabled()">
+                MELCS Settings is not configured please configure it
+                <Link class="text-blue-500" :href="route('manage-melcs.index')"
+                    >here</Link
+                >
+            </div>
+            <div v-if="isLoading" class="flex gap-4 items-center">
+                <div
+                    style="border-top-color: transparent"
+                    class="w-10 h-10 border-4 border-[#181E36] border-solid rounded-full animate-spin"
+                ></div>
+                <p class="text-gray-500">
+                    Please wait this will take a minute or two..
+                </p>
+            </div>
+
+            <Button
+                :disabled="isGenerateEnabled() || isLoading"
+                @click="generate"
+            >
+                Generate</Button
+            >
+            <a
+                class="uppercase font-bold mt-2"
+                v-if="props.generatedCert != null"
+                :href="props.generatedCert.path"
+                download
+                >Download</a
+            >
         </div>
     </AppLayout>
 </template>

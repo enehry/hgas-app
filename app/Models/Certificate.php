@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Certificate
+class Certificate extends Model
 {
+  use HasFactory;
 
-  public function __construct(
-    public string $name,
-    public array $melcs,
-  ) {
-  }
+  protected $fillable = [
+    'user_id',
+    'path',
+  ];
 }

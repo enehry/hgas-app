@@ -3,18 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Imports\CertificateImport;
+use App\Models\Certificate;
 use App\Models\Melc;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
   //
   public function index()
   {
-    return Inertia::render('Dashboard');
+    $userID = Auth::user()->id;
+    $settings = Settings::where('user_id', $userID)->get();
+    $melcs = Melc::where('user_id', $userID)->orderBy('order', 'asc')->get();
+    // get certificate path
+    $generatedCert = Certificate::where('user_id', $userID)->latest()->first();
+
+
+
+    return Inertia::render('Dashboard', [
+      'melcs' => $melcs,
+      'certificate' => [
+        'title' => $settings->where('name', 'title')->first()?->value,
+        'school_year' => $settings->where('name', 'school_year')->first()?->value,
+        'adviser' => $settings->where('name', 'adviser')->first()?->value,
+        'grade_section' => $settings->where('name', 'grade_section')->first()?->value,
+        'signature' => $settings->where('name', 'signature')->first()?->value,
+      ],
+      'generatedCert' => $generatedCert,
+    ]);
   }
 
   public function generate(Request $request)
@@ -37,11 +57,13 @@ class DashboardController extends Controller
     // }
 
     // get all settings 
-    $settings = Settings::All();
+    $settings = Settings::where('user_id', Auth::user()->id)->get();
+
+
 
     // get all melcs
     // get only the description and store it to array
-    $_melcs = Melc::orderBy('order', 'asc')->get()
+    $_melcs = Melc::where('user_id', Auth::user()->id)->orderBy('order', 'asc')->get()
       ->map(function ($melc) {
         return $melc->only('description');
       });
@@ -111,7 +133,15 @@ class DashboardController extends Controller
 
 
     $pdf = Pdf::loadView('pdf.certificate', ['certificates' => $certificates]);
-    $pdf->save(public_path('certificates\sample.pdf'));
+
+    // save path to database
+    $userID = Auth::user()->id;
+    $certificate = new Certificate();
+    $certificate->user_id = $userID;
+    $path = 'certificates/' . $userID . '-' . uniqid() . '.pdf';
+    $pdf->save(public_path($path));
+    $certificate->path = $path;
+    $certificate->save();
 
     // return view('pdf.certificate', [$certificates => $certificates]);
 
@@ -119,5 +149,7 @@ class DashboardController extends Controller
     //   'message' => 'success',
     //   'file' => $certificates,
     // ]);
+
+    return redirect()->back()->withBanner('Certificates generated');
   }
 }

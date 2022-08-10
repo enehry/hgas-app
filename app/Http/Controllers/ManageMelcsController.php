@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Melc;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ManageMelcsController extends Controller
 {
+
+  private function userID()
+  {
+    return Auth::user()->id;
+  }
   //
   public function index()
   {
 
-    $data = Melc::orderBy('order', 'asc')->get();
+    $data = Melc::where('user_id', $this->userID())->orderBy('order', 'asc')->get();
 
-    $settings = Settings::All();
+    $settings = Settings::where('user_id', $this->userID())->get();
 
     return Inertia::render('ManageMelcs/Index', [
       'melcs' => $data,
@@ -36,6 +42,8 @@ class ManageMelcsController extends Controller
       'order' => 'required|integer',
     ]);
 
+    $data['user_id'] = $this->userID();
+
     Melc::create($data);
 
     return redirect()->back()->withBanners('Melc created successfully.');
@@ -55,6 +63,7 @@ class ManageMelcsController extends Controller
       'description' => 'required|string|max:255',
       'order' => 'required|integer',
     ]);
+
     $melc->update($data);
     return redirect()->back()->withBanners('Melc updated successfully.');
   }
@@ -71,9 +80,10 @@ class ManageMelcsController extends Controller
 
 
     if ($request->title) {
-      $cert = Settings::where('name', 'title')->first();
+      $cert = Settings::where('name', 'title')->where('user_id', $this->userID())->first();
       if (!$cert) {
         $cert = Settings::create([
+          'user_id' => $this->userID(),
           'name' => 'title',
           'value' => $request->title,
         ]);
@@ -85,9 +95,10 @@ class ManageMelcsController extends Controller
     }
 
     if ($request->school_year) {
-      $cert = Settings::where('name', 'school_year')->first();
+      $cert = Settings::where('name', 'school_year')->where('user_id', $this->userID())->first();
       if (!$cert) {
         $cert = Settings::create([
+          'user_id' => $this->userID(),
           'name' => 'school_year',
           'value' => $request->school_year,
         ]);
@@ -99,9 +110,10 @@ class ManageMelcsController extends Controller
     }
 
     if ($request->adviser) {
-      $cert = Settings::where('name', 'adviser')->first();
+      $cert = Settings::where('name', 'adviser')->where('user_id', $this->userID())->first();
       if (!$cert) {
         $cert = Settings::create([
+          'user_id' => $this->userID(),
           'name' => 'adviser',
           'value' => $request->adviser,
         ]);
@@ -113,9 +125,10 @@ class ManageMelcsController extends Controller
     }
 
     if ($request->grade_section) {
-      $cert = Settings::where('name', 'grade_section')->first();
+      $cert = Settings::where('name', 'grade_section')->where('user_id', $this->userID())->first();
       if (!$cert) {
         $cert = Settings::create([
+          'user_id' => $this->userID(),
           'name' => 'grade_section',
           'value' => $request->grade_section,
         ]);
@@ -127,7 +140,7 @@ class ManageMelcsController extends Controller
     }
 
     if ($request->hasFile('signature')) {
-      $cert = Settings::where('name', 'signature')->first();
+      $cert = Settings::where('name', 'signature')->where('user_id', $this->userID())->first();
 
       // save file to public path 
       $file = $request->file('signature');
@@ -140,6 +153,7 @@ class ManageMelcsController extends Controller
 
       if (!$cert) {
         $cert = Settings::create([
+          'user_id' => $this->userID(),
           'name' => 'signature',
           'value' => $file_path,
         ]);

@@ -13,11 +13,10 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('melcs', function (Blueprint $table) {
+    Schema::create('certificates', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('user_id');
-      $table->string('description');
-      $table->integer('order');
+      $table->string('path');
       $table->timestamps();
     });
   }
@@ -29,6 +28,6 @@ return new class extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('melcs');
+    Schema::dropIfExists('certificates');
   }
 };

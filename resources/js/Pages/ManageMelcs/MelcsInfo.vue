@@ -129,9 +129,14 @@ const onCancel = () => {
                             </JetButton>
                         </div>
                     </form>
-                    <h2 class="font-medium uppercase text-xl mb-2">
+                    <h2 class="font-bold uppercase text-xl mb-2 mt-8">
                         Melcs List
                     </h2>
+                    <div v-if="props.melcs.length <= 0">
+                        <div class="text-center text-gray-500 my-10">
+                            No MELCs found.
+                        </div>
+                    </div>
                     <ul>
                         <li v-for="melc in props.melcs">
                             <div
