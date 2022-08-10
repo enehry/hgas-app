@@ -29,7 +29,7 @@ const submit = () => {
     <JetAuthenticationCard>
         <div class="hidden lg:block lg:w-1/2 bg-cover bg-[#181E36] p-6">
             <img
-                src="/storage/hgas-images/louisian-icon.png"
+                src="/hgas-images/louisian-icon.png"
                 alt=""
                 class="w-80 mx-auto p-6 pt-8"
             />
