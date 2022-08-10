@@ -1,5 +1,6 @@
 <template>
     <AppLayout title="Manage Users">
+        <Head title="Users" />
         <div class="flex flex-col p-6 w-[50rem]">
             <div class="overflow-x-auto">
                 <div class="flex justify-between py-3 pl-2">
@@ -10,6 +11,7 @@
                             name="search"
                             class="block w-full p-3 pl-10 text-sm border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm bg-white"
                             placeholder="Search..."
+                            v-model="filter.search"
                         />
                         <div
                             class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none"
@@ -33,7 +35,7 @@
 
                     <div class="flex items-center space-x-2">
                         <div class="relative">
-                            <button
+                            <!-- <button
                                 class="relative z-0 inline-flex text-sm mr-2 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm bg-white"
                             >
                                 <span
@@ -57,7 +59,7 @@
                                     </div>
                                     <div class="hidden sm:block">Filters</div>
                                 </span>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -100,65 +102,36 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                <tr>
+                                <tr v-if="users.length <= 0">
                                     <td
-                                        class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
+                                        colspan="5"
+                                        class="px-6 py-4 text-center whitespace-no-wrap text-sm leading-5 font-medium text-gray-900"
                                     >
-                                        Mark Zuckerberg
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap"
-                                    >
-                                        zuck@fb.com
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap"
-                                    >
-                                        Admin
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
-                                    >
-                                        <button
-                                            class="text-green-500 hover:text-green-700"
-                                            v-on:click="toggleModal()"
-                                        >
-                                            Edit
-                                        </button>
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
-                                    >
-                                        <button
-                                            class="text-red-500 hover:text-red-700"
-                                            v-on:click="toggleDelete()"
-                                        >
-                                            Delete
-                                        </button>
+                                        User is empty or not found
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr v-for="user in users" :key="user.id">
                                     <td
                                         class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
                                     >
-                                        Jeff Bezos
+                                        {{ user.name }}
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap"
                                     >
-                                        jeff@amazon.com
+                                        {{ user.email }}
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap"
                                     >
-                                        User
+                                        {{ user.role }}
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                                     >
                                         <button
                                             class="text-green-500 hover:text-green-700"
-                                            v-on:click="toggleModal()"
+                                            v-on:click="toggleModal(user)"
                                         >
                                             Edit
                                         </button>
@@ -168,7 +141,7 @@
                                     >
                                         <button
                                             class="text-red-500 hover:text-red-700"
-                                            v-on:click="toggleDelete()"
+                                            v-on:click="toggleDelete(user)"
                                         >
                                             Delete
                                         </button>
@@ -201,48 +174,81 @@
                         <!--body-->
                         <div class="relative p-6 flex-auto">
                             <div class="grid w-96">
+                                <ValidationErrors />
                                 <label
                                     for="name"
-                                    class="mb-1 block font-medium text-sm text-gray-700"
+                                    class="mb-1 mt-4 block font-medium text-sm text-gray-700"
                                     >Name</label
                                 >
                                 <input
                                     type="text"
                                     id="name"
+                                    v-model="form.name"
+                                    :class="{
+                                        'border-red-500': errors?.name,
+                                    }"
                                     class="mb-3 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm"
                                 />
-
+                                <InputError
+                                    class="mb-2"
+                                    :message="errors?.name"
+                                />
                                 <label
-                                    for="name"
+                                    for="email"
                                     class="mb-1 block font-medium text-sm text-gray-700"
                                     >Email</label
                                 >
                                 <input
                                     type="text"
-                                    id="name"
+                                    v-model="form.email"
+                                    :class="{
+                                        'border-red-500': errors?.email,
+                                    }"
+                                    id="email"
                                     class="mb-3 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm"
                                 />
-
+                                <InputError
+                                    class="mb-2"
+                                    :message="errors?.email"
+                                />
                                 <label
-                                    for="name"
+                                    for="role"
                                     class="mb-1 block font-medium text-sm text-gray-700"
                                     >Role</label
                                 >
-                                <input
-                                    type="text"
-                                    id="name"
+                                <select
+                                    v-model="form.role"
+                                    :class="{
+                                        'border-red-500': errors?.role,
+                                    }"
                                     class="mb-3 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm"
+                                >
+                                    <option value="">Select Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                                <InputError
+                                    class="mb-2"
+                                    :message="errors?.role"
                                 />
 
                                 <label
-                                    for="name"
+                                    for="password"
                                     class="mb-1 block font-medium text-sm text-gray-700"
                                     >New password</label
                                 >
                                 <input
                                     type="text"
-                                    id="name"
+                                    v-model="form.password"
+                                    :class="{
+                                        'border-red-500': errors?.password,
+                                    }"
+                                    id="password"
                                     class="mb-3 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm"
+                                />
+                                <InputError
+                                    class="mb-2"
+                                    :message="errors?.password"
                                 />
 
                                 <label
@@ -252,8 +258,17 @@
                                 >
                                 <input
                                     type="text"
+                                    v-model="form.password_confirmation"
+                                    :class="{
+                                        'border-red-500':
+                                            errors?.password_confirmation,
+                                    }"
                                     id="name"
                                     class="mb-3 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm"
+                                />
+                                <InputError
+                                    class="mb-2"
+                                    :message="errors?.password_confirmation"
                                 />
                             </div>
                         </div>
@@ -264,14 +279,14 @@
                             <button
                                 class="px-4 py-2 text-base mx-1 bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:text-[#AAAAAA] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleModal()"
+                                @click="toggleModal(null)"
                             >
                                 Cancel
                             </button>
                             <button
                                 class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] hover:text-[#C6C6C6] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleModal()"
+                                @click="updateConfirmed()"
                             >
                                 Save
                             </button>
@@ -308,7 +323,7 @@
                             <p
                                 class="my-1 text-slate-500 text-lg leading-relaxed"
                             >
-                                Do you really wanto to delete this accout?
+                                Do you really want to delete this account?
                             </p>
                         </div>
                         <!--footer-->
@@ -318,14 +333,14 @@
                             <button
                                 class="px-4 py-2 text-base mx-1 bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:text-[#AAAAAA] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleDelete()"
+                                v-on:click="toggleDelete(null)"
                             >
                                 No
                             </button>
                             <button
                                 class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] hover:text-[#C6C6C6] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleDelete()"
+                                @click="deleteConfirmed()"
                             >
                                 Yes
                             </button>
@@ -342,24 +357,104 @@
 </template>
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
-
+import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { Inertia } from "@inertiajs/inertia";
+import ValidationErrors from "@/Jetstream/ValidationErrors.vue";
+import InputError from "@/Jetstream/InputError.vue";
+import throttle from "lodash/throttle";
+import pickBy from "lodash/pickBy";
 export default {
     components: {
         AppLayout,
+        Head,
+        ValidationErrors,
+        InputError,
     },
+    props: {
+        users: {
+            type: Array,
+            default: () => [],
+        },
+        errors: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
+
     name: "modal",
     data() {
         return {
             showModal: false,
             showDeleteConfirm: false,
+            selectedUser: null,
+            form: useForm({
+                name: "",
+                role: "",
+                email: "",
+                password: "",
+                password_confirmation: "",
+            }),
+            filter: {
+                search: "",
+            },
         };
     },
     methods: {
-        toggleModal: function () {
+        toggleModal: function (user) {
+            this.selectedUser = user;
+            if (user != null) {
+                this.form.name = user.name;
+                this.form.role = user.role;
+                this.form.email = user.email;
+                this.form.password = "";
+                this.form.password_confirmation = "";
+                this.$page.props.errors = {};
+            }
             this.showModal = !this.showModal;
         },
-        toggleDelete: function () {
+        toggleDelete: function (user) {
+            this.selectedUser = user;
             this.showDeleteConfirm = !this.showDeleteConfirm;
+        },
+        updateConfirmed: function () {
+            this.form.put(
+                route("users.update", {
+                    user: this.selectedUser.id,
+                }),
+                {
+                    onSuccess: () => {
+                        this.toggleModal(null);
+                        this.form.reset();
+                    },
+                    preserveScroll: true,
+                    preserveState: true,
+                }
+            );
+        },
+        deleteConfirmed: function () {
+            if (this.selectedUser != null) {
+                Inertia.visit(route("users.destroy", this.selectedUser.id), {
+                    method: "delete",
+                    preserveScroll: true,
+                    preserveState: true,
+                    onFinish: () => {
+                        this.showDeleteConfirm = false;
+                    },
+                });
+            }
+        },
+    },
+    watch: {
+        filter: {
+            handler: throttle(function () {
+                let filter = pickBy(this.filter);
+                Inertia.get(this.route("users.index"), filter, {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                });
+            }, 500),
+            deep: true,
         },
     },
 };

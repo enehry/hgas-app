@@ -99,7 +99,6 @@ const submit = () => {
                                 >Register</JetButton
                             >
                         </Link>
-
                         <JetButton
                             class="w-full h-10"
                             :class="{ 'opacity-25': form.processing }"
