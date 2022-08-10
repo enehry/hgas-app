@@ -1,6 +1,6 @@
 <template>
-    <AppLayout>
-        <div class="flex max-w-2xl flex-col">
+    <AppLayout title="Manage Users">
+        <div class="flex flex-col p-6 w-[50rem]">
             <div class="overflow-x-auto">
                 <div class="flex justify-between py-3 pl-2">
                     <div class="relative max-w-2xl">
@@ -34,7 +34,7 @@
                     <div class="flex items-center space-x-2">
                         <div class="relative">
                             <button
-                                class="relative z-0 inline-flex text-sm rounded-md shadow-sm focus:ring-accent-500 focus:border-accent-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1"
+                                class="relative z-0 inline-flex text-sm mr-2 border-gray-300 focus:border-[#181E36] focus:ring focus:ring-[#374151] focus:ring-opacity-50 rounded-md shadow-sm bg-white"
                             >
                                 <span
                                     class="relative inline-flex items-center px-3 py-3 space-x-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md sm:py-2"
@@ -65,7 +65,7 @@
                 <div class="p-1.5 w-full inline-block align-middle">
                     <div class="overflow-hidden border rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-[#181E36] text-white">
+                            <thead class="bg-[#181E36] text-white h-16">
                                 <tr>
                                     <th
                                         scope="col"
@@ -194,19 +194,9 @@
                     >
                         <!--header-->
                         <div
-                            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t bg-[#181E36] text-white"
+                            class="text-center justify-between p-5 border-b border-solid border-slate-200 rounded-t bg-[#181E36] text-white uppercase font-semibold"
                         >
-                            <h3 class="text-3xl font-semibold">Edit Account</h3>
-                            <button
-                                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                v-on:click="toggleModal()"
-                            >
-                                <span
-                                    class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
-                                >
-                                    ×
-                                </span>
-                            </button>
+                            <p>Edit account</p>
                         </div>
                         <!--body-->
                         <div class="relative p-6 flex-auto">
@@ -269,7 +259,7 @@
                         </div>
                         <!--footer-->
                         <div
-                            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+                            class="flex items-center justify-end p-2 pr-6 pb-6 border-slate-200 rounded-b"
                         >
                             <button
                                 class="px-4 py-2 text-base mx-1 bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:text-[#AAAAAA] disabled:opacity-25 transition"
@@ -279,7 +269,7 @@
                                 Cancel
                             </button>
                             <button
-                                class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
+                                class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] hover:text-[#C6C6C6] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
                                 type="button"
                                 v-on:click="toggleModal()"
                             >
@@ -308,45 +298,34 @@
                     >
                         <!--header-->
                         <div
-                            class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t bg-[#181E36] text-white"
+                            class="text-center justify-between p-5 border-b border-solid border-slate-200 rounded-t bg-[#181E36] text-white uppercase font-semibold"
                         >
-                            <h3 class="text-3xl font-semibold">
-                                Delete Account
-                            </h3>
-                            <button
-                                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                v-on:click="toggleDelete()()"
-                            >
-                                <span
-                                    class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
-                                >
-                                    ×
-                                </span>
-                            </button>
+                            <p>Delete account</p>
                         </div>
+
                         <!--body-->
                         <div class="relative p-6 flex-auto">
                             <p
-                                class="my-4 text-slate-500 text-lg leading-relaxed"
+                                class="my-1 text-slate-500 text-lg leading-relaxed"
                             >
                                 Do you really wanto to delete this accout?
                             </p>
                         </div>
                         <!--footer-->
                         <div
-                            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+                            class="flex items-center justify-end p-2 pr-6 pb-6 border-slate-200 rounded-b"
                         >
                             <button
                                 class="px-4 py-2 text-base mx-1 bg-white border border-transparent rounded-md font-semibold text-[#181E36] tracking-widest hover:text-[#AAAAAA] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleDelete()()"
+                                v-on:click="toggleDelete()"
                             >
                                 No
                             </button>
                             <button
                                 class="px-4 py-2 text-base bg-[#181E36] border border-transparent rounded-md font-semibold text-white tracking-widest hover:bg-[#656979] hover:text-[#C6C6C6] active:bg-[#101424] focus:outline-none focus:border-[#181E36] focus:ring focus:ring-[#9BA0A8] disabled:opacity-25 transition"
                                 type="button"
-                                v-on:click="toggleDelete()()"
+                                v-on:click="toggleDelete()"
                             >
                                 Yes
                             </button>
@@ -355,7 +334,7 @@
                 </div>
             </div>
             <div
-                v-if="showModal"
+                v-if="showDeleteConfirm"
                 class="opacity-25 fixed inset-0 z-40 bg-black"
             ></div>
         </div>
@@ -379,7 +358,7 @@ export default {
         toggleModal: function () {
             this.showModal = !this.showModal;
         },
-        toggleDelete() {
+        toggleDelete: function () {
             this.showDeleteConfirm = !this.showDeleteConfirm;
         },
     },
