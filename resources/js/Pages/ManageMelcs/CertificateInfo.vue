@@ -130,7 +130,7 @@ const updateSignaturePreview = () => {
                         @change="updateSignaturePreview"
                     />
 
-                    <JetLabel for="photo" value="Photo" />
+                    <JetLabel for="photo" value="Signature" />
 
                     <!-- Current Signature -->
                     <div v-show="!signaturePreview" class="mt-2">
@@ -162,7 +162,7 @@ const updateSignaturePreview = () => {
                         type="button"
                         @click.prevent="selectNewSignature"
                     >
-                        Select A New Photo
+                        Add signature
                     </JetSecondaryButton>
 
                     <JetSecondaryButton
