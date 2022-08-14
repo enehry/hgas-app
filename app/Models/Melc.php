@@ -13,5 +13,7 @@ class Melc extends Model
     'user_id',
     'description',
     'order',
+    'title',
+    'weeks',
   ];
 }

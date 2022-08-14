@@ -17,6 +17,8 @@ const props = defineProps({
 const form = useForm({
     order: "",
     description: "",
+    weeks: "",
+    title: "",
 });
 
 const handelSubmit = () => {
@@ -37,6 +39,8 @@ const handelSubmit = () => {
             onFinish: () => {
                 form.order = "";
                 form.description = "";
+                form.weeks = "";
+                form.title = "";
                 console.log("ok");
             },
             preserveScroll: true,
@@ -56,16 +60,20 @@ const handleDelete = (id) => {
 const isUpdating = ref(false);
 const selectedID = ref(null);
 
-const handleEdit = (id, order, description) => {
+const handleEdit = (id, order, description, title, weeks) => {
     selectedID.value = id;
     form.order = order;
     form.description = description;
+    form.title = title;
+    form.weeks = weeks;
     isUpdating.value = true;
 };
 
 const onCancel = () => {
     form.order = "";
     form.description = "";
+    form.weeks = "";
+    form.title = "";
     isUpdating.value = false;
 };
 </script>
@@ -82,23 +90,59 @@ const onCancel = () => {
                 <div>
                     <form
                         @submit.prevent="handelSubmit"
-                        class="mb-4 flex gap-4"
+                        class="mb-4 flex flex-col"
                     >
-                        <div class="w-20">
-                            <JetLabel>Order</JetLabel>
-                            <input
-                                v-model="form.order"
-                                type="number"
-                                class="w-full rounded-md"
-                                :class="{
-                                    'border-red-500': form.errors?.order,
-                                }"
-                            />
-                            <div
-                                v-if="form.errors.order"
-                                class="text-xs text-red-500"
-                            >
-                                {{ form.errors.order }}
+                        <div class="flex gap-4 mb-4">
+                            <div class="w-20">
+                                <JetLabel>Order</JetLabel>
+                                <input
+                                    v-model="form.order"
+                                    type="number"
+                                    class="w-full rounded-md"
+                                    :class="{
+                                        'border-red-500': form.errors?.order,
+                                    }"
+                                />
+                                <div
+                                    v-if="form.errors.order"
+                                    class="text-xs text-red-500"
+                                >
+                                    {{ form.errors.order }}
+                                </div>
+                            </div>
+                            <div class="w-full">
+                                <JetLabel>Title</JetLabel>
+                                <input
+                                    v-model="form.title"
+                                    type="text"
+                                    class="w-full rounded-md"
+                                    :class="{
+                                        'border-red-500': form.errors?.title,
+                                    }"
+                                />
+                                <div
+                                    v-if="form.errors.title"
+                                    class="text-xs text-red-500"
+                                >
+                                    {{ form.errors.title }}
+                                </div>
+                            </div>
+                            <div class="w-40">
+                                <JetLabel>Weeks</JetLabel>
+                                <input
+                                    v-model="form.weeks"
+                                    type="text"
+                                    class="w-full rounded-md"
+                                    :class="{
+                                        'border-red-500': form.errors?.weeks,
+                                    }"
+                                />
+                                <div
+                                    v-if="form.errors.weeks"
+                                    class="text-xs text-red-500"
+                                >
+                                    {{ form.errors.weeks }}
+                                </div>
                             </div>
                         </div>
                         <div class="w-full">
@@ -120,7 +164,7 @@ const onCancel = () => {
                                 {{ form.errors.description }}
                             </div>
                         </div>
-                        <div class="mt-5 flex flex-col gap-2">
+                        <div class="mt-5 flex flex-row justify-end gap-2">
                             <JetButton class="py-2" type="submit">{{
                                 isUpdating ? "Update" : "Add"
                             }}</JetButton>
@@ -145,6 +189,10 @@ const onCancel = () => {
                                 <div>
                                     {{ melc.order }}. {{ melc.description }}
                                 </div>
+                                <div>
+                                    Weeks {{ melc.weeks }} {{ melc.title }}
+                                </div>
+
                                 <div class="flex items-center gap-2">
                                     <button
                                         @click="handleDelete(melc.id)"
@@ -171,7 +219,9 @@ const onCancel = () => {
                                             handleEdit(
                                                 melc.id,
                                                 melc.order,
-                                                melc.description
+                                                melc.description,
+                                                melc.title,
+                                                melc.weeks
                                             )
                                         "
                                         class="text-blue-500"

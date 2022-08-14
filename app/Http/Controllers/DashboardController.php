@@ -23,7 +23,6 @@ class DashboardController extends Controller
     $generatedCert = Certificate::where('user_id', $userID)->latest()->first();
 
 
-
     return Inertia::render('Dashboard', [
       'melcs' => $melcs,
       'certificate' => [
@@ -63,10 +62,8 @@ class DashboardController extends Controller
 
     // get all melcs
     // get only the description and store it to array
-    $_melcs = Melc::where('user_id', Auth::user()->id)->orderBy('order', 'asc')->get()
-      ->map(function ($melc) {
-        return $melc->only('description');
-      });
+    $_melcs = Melc::where('user_id', Auth::user()->id)->orderBy('order', 'asc')->get();
+
 
 
     $melcsStart = 5;
@@ -108,6 +105,8 @@ class DashboardController extends Controller
             'score' => $collection[$i][$iteration],
             'description' => $melc['description'],
             'interpretation' => $interpretation,
+            'weeks' => $melc['weeks'],
+            'title' => $melc['title'],
           ];
           $iteration++;
         }

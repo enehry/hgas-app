@@ -16,6 +16,8 @@ return new class extends Migration
     Schema::create('melcs', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('user_id');
+      $table->string('weeks');
+      $table->string('title');
       $table->string('description');
       $table->integer('order');
       $table->timestamps();

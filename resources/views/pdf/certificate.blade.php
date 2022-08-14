@@ -114,7 +114,7 @@
         <p class="s1" style="padding-top: 7pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">MELC</p>
       </td>
       <td>
-        <p class="s1" style="line-height: 12pt;text-align: center;">Week {{ $loop->index + 1}}
+        <p class="s1" style="line-height: 12pt;text-align: center;">Week {{ $melcs['weeks']}}
         </p>
       </td>
       <td rowspan="2" style="width: 30%">
@@ -125,7 +125,8 @@
     <tr style="height:15pt">
       <td>
         <p class="s1" style="line-height: 13pt;text-align: center;">
-          Processing</p>
+          {{ $melcs['title'] }}
+        </p>
       </td>
     </tr>
     <tr style="height:41pt">

@@ -40,6 +40,8 @@ class ManageMelcsController extends Controller
     $data = $request->validate([
       'description' => 'required|string|max:255',
       'order' => 'required|integer',
+      'title' => 'required|string|max:255',
+      'weeks' => 'required|string',
     ]);
 
     $data['user_id'] = $this->userID();
