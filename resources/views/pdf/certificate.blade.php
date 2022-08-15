@@ -88,7 +88,7 @@
 <body style="padding-left: 28.3464567pt; padding-right: 28.3464567pt">
   <!-- center text -->
   @foreach ($certificates as $certificate)
-  <h1 style="padding-top: 70pt; text-align:center;">Tuguegarao City, Cagayan
+  <h1 style="padding-top: 70pt; text-align:center;">University of Saint Louis Tuguegarao
     <br> Senior High School
   </h1>
   <h1 style="padding-top: 1pt; text-align:center;">{{ $certificate['school_year'] }}</h1>
