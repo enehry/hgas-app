@@ -40,7 +40,7 @@ const submit = () => {
                 class="w-80 mx-auto p-6 pt-8"
             />
             <h2 class="text-base text-white text-center pb-3">
-                UNIVERSITY OF SAINT LOUIS TUGEGARAO<br />
+                UNIVERSITY OF SAINT LOUIS TUGUEGARAO<br />
                 SENIOR HIGH SCHOOL DEPARTMENT
             </h2>
             <h2 class="text-2xl font-semibold text-white text-center">
@@ -52,7 +52,7 @@ const submit = () => {
             <h2
                 class="lg:hidden text-base font-semibold text-gray-700 text-center mt-10 pb-10"
             >
-                University of Saint Louis Tugegarao Senior High School
+                University of Saint Louis Tuguegarao Senior High School
                 Department <br />
                 Homeroom Guidance Automation System
             </h2>
