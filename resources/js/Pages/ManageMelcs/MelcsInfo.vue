@@ -173,6 +173,8 @@ const onCancel = () => {
                             </JetButton>
                         </div>
                     </form>
+                    <br>
+                    <hr>
                     <h2 class="font-bold uppercase text-xl mb-2 mt-8">
                         Melcs List
                     </h2>
@@ -186,11 +188,11 @@ const onCancel = () => {
                             <div
                                 class="flex justify-between gap-4 mb-2 items-center"
                             >
-                                <div>
+                                <div class="flex-none w-64">
                                     {{ melc.order }}. {{ melc.description }}
                                 </div>
-                                <div>
-                                    Weeks {{ melc.weeks }} {{ melc.title }}
+                                <div class="flex-none w-72">
+                                    {{ melc.weeks }} - {{ melc.title }}
                                 </div>
 
                                 <div class="flex items-center gap-2">
@@ -253,3 +255,4 @@ const onCancel = () => {
 </template>
 
 <style></style>
+
